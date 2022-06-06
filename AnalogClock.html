@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock</title>
+</head>
+
+    <style>
+
+        .center {
+            position: relative;
+            top: 230px;
+            left: 230px;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: black;
+        }
+
+        .clock {
+            height: 500px; 
+            width: 500px;
+            background: rgb(217, 173, 173);
+            border-radius: 50%;
+            border: black solid 8px;
+        }
+
+        .clockFace {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: rgb(188, 179, 179);
+        }
+
+        .handHours {
+            position: relative;
+            top: 240px;
+            left: 90px;
+            height: 15px;
+            width: 150px;
+            transform: rotate(90deg);
+            transform-origin: 100%;
+            background: rgb(96, 95, 95);
+            border-bottom-left-radius: 50%;
+            border-top-left-radius: 50%;
+            border-bottom-right-radius: 30%;
+            border-top-right-radius: 30%;
+        }
+
+        .handMinutes {
+            position: relative;
+            top: 255px;
+            left: 40px;
+            height: 4px;
+            width: 200px;
+            background: black;
+            transform: rotate(90deg);
+            transform-origin: 100%;
+            
+        }
+
+        .handSeconds {
+            position: relative;
+            top: 257px;
+            left: 15px;
+            height: 1px;
+            width: 225px;
+            background: red;
+            transform: rotate(90deg);
+            transform-origin: 100%;
+        }
+    </style>
+
+<body>
+
+    <div class = "clockFace">
+        <div class = "clock">
+            <div class = "handSeconds"></div>
+            <div class = "handMinutes"></div>
+            <div class = "handHours"></div>
+            <div class = "center"></div>
+    </div>
+    
+
+    <script>
+        let handSeconds = document.querySelector(".handSeconds");
+        let handMinutes = document.querySelector(".handMinutes");
+        let handHours = document.querySelector(".handHours");
+
+        function tellTime() {
+            let now = new Date();
+            let seconds = now.getSeconds();
+            let minutes = now.getMinutes();
+            let hours = now.getHours();
+
+            let secondsDegrees = (seconds / 60) * 360 + 90;
+            handSeconds.style.transform = `rotate(${secondsDegrees}deg)`;
+            
+            let minutesDegrees = (minutes / 60) * 360 + 90;
+            handMinutes.style.transform = `rotate(${minutesDegrees}deg)`;
+
+            let hoursDegrees = ((hours / 12) * 360) + ((minutes / 60) * 30) + 90;
+            handHours.style.transform = `rotate(${hoursDegrees}deg)`;
+
+        }
+
+        setInterval(tellTime, 1000);
+
+        tellTime();
+
+
+    </script>
+</body>
+</html>
